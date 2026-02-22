@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Raj Wardhan</title>
+  <title>Raj Bio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      color: white;
-      text-align: center;
       background: linear-gradient(-45deg, #0f0f0f, #1a1a40, #000000, #16213e);
       background-size: 400% 400%;
-      animation: gradient 10s ease infinite;
+      animation: gradient 12s ease infinite;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -25,113 +26,77 @@
       100% { background-position: 0% 50%; }
     }
 
+    .container {
+      width: 90%;
+      max-width: 600px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
     .card {
+      text-decoration: none;
       backdrop-filter: blur(15px);
       background: rgba(255, 255, 255, 0.08);
       border-radius: 20px;
       padding: 40px;
-      width: 320px;
-      box-shadow: 0 0 30px rgba(0,0,0,0.5);
-    }
-
-    .profile-pic {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 20px;
-      border: 3px solid white;
-    }
-
-    h1 {
-      margin: 10px 0;
-      font-size: 24px;
-    }
-
-    .typing {
-      color: #00ffff;
-      font-weight: bold;
-      margin-bottom: 30px;
-      min-height: 24px;
-    }
-
-    .link-btn {
-      display: block;
-      text-decoration: none;
-      color: white;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 30px;
-      background: rgba(255,255,255,0.1);
+      text-align: center;
       transition: 0.3s;
-      backdrop-filter: blur(5px);
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    .link-btn:hover {
-      background: rgba(255,255,255,0.2);
-      transform: scale(1.05);
+    .card:hover {
+      transform: translateY(-8px) scale(1.08);
+      background: rgba(255, 255, 255, 0.15);
     }
 
-    .visitor-count {
-      margin-top: 20px;
-      font-size: 14px;
-      color: #ccc;
+    .card i {
+      font-size: 60px;
+      transition: 0.3s;
+    }
+
+    /* Brand Colors */
+    .twitter i { color: #1DA1F2; }
+    .linkedin i { color: #0077B5; }
+    .reddit i { color: #FF4500; }
+    .discord i { color: #5865F2; }
+
+    @media(max-width:500px){
+      .container {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
 
-<div class="card">
-  <img src="https://i.imgur.com/yourimage.jpg" class="profile-pic">
+<div class="container">
 
-  <h1>Raj Wardhan</h1>
-  <div class="typing" id="typing"></div>
+  <a href="https://twitter.com/rajwardhan2708" target="_blank" class="card twitter">
+    <i class="fa-brands fa-twitter"></i>
+  </a>
 
-  <a href="https://twitter.com/YOUR_USERNAME" target="_blank" class="link-btn">Twitter</a>
-  <a href="https://linkedin.com/in/YOUR_USERNAME" target="_blank" class="link-btn">LinkedIn</a>
-  <a href="https://instagram.com/YOUR_USERNAME" target="_blank" class="link-btn">Instagram</a>
-  <a href="https://github.com/YOUR_USERNAME" target="_blank" class="link-btn">GitHub</a>
+  <a href="https://linkedin.com/in/raj-wardhan-singh-45081a179" target="_blank" class="card linkedin">
+    <i class="fa-brands fa-linkedin"></i>
+  </a>
 
-  <div class="visitor-count">
-    Visitors: <span id="visitorNumber">Loading...</span>
-  </div>
+  <a href="https://reddit.com/user/Additional_Bed5482" target="_blank" class="card reddit">
+    <i class="fa-brands fa-reddit"></i>
+  </a>
+
+  <!-- Discord -->
+  <a href="https://discord.com/users/YOUR_DISCORD_ID" target="_blank" class="card discord">
+    <i class="fa-brands fa-discord"></i>
+  </a>
+
 </div>
 
 <script>
-  // Typing animation
-  const texts = ["Full Stack Developer", "Problem Solver", "Tech Enthusiast"];
-  let count = 0;
-  let index = 0;
-  let currentText = "";
-  let letter = "";
-
-  (function type() {
-    if (count === texts.length) count = 0;
-    currentText = texts[count];
-    letter = currentText.slice(0, ++index);
-    document.getElementById("typing").textContent = letter;
-    if (letter.length === currentText.length) {
-      setTimeout(() => {
-        index = 0;
-        count++;
-      }, 1000);
-    }
-    setTimeout(type, 100);
-  })();
-
-  // Call backend for tracking
   fetch("https://bio-tracker-1-ui5d.onrender.com/")
     .catch(() => {});
-
-  // Visitor counter fetch
-  fetch("https://bio-tracker-1-ui5d.onrender.com/count")
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById("visitorNumber").textContent = data.count;
-    })
-    .catch(() => {
-      document.getElementById("visitorNumber").textContent = "—";
-    });
 </script>
 
 </body>
