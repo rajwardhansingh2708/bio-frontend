@@ -6,65 +6,132 @@
 
   <style>
     body {
-      background: #0f0f0f;
-      color: white;
+      margin: 0;
       font-family: Arial, sans-serif;
+      color: white;
       text-align: center;
-      padding-top: 100px;
+      background: linear-gradient(-45deg, #0f0f0f, #1a1a40, #000000, #16213e);
+      background-size: 400% 400%;
+      animation: gradient 10s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .card {
+      backdrop-filter: blur(15px);
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 40px;
+      width: 320px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    }
+
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+      border: 3px solid white;
     }
 
     h1 {
-      font-size: 36px;
-      margin-bottom: 10px;
+      margin: 10px 0;
+      font-size: 24px;
     }
 
-    p {
-      color: #aaa;
-      margin-bottom: 40px;
-    }
-
-    .social-container {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .social-btn {
-      text-decoration: none;
-      padding: 12px 25px;
-      border-radius: 30px;
+    .typing {
+      color: #00ffff;
       font-weight: bold;
-      transition: 0.3s;
-      color: white;
+      margin-bottom: 30px;
+      min-height: 24px;
     }
 
-    .twitter { background: #1DA1F2; }
-    .linkedin { background: #0077b5; }
-    .instagram { background: #E1306C; }
-    .github { background: #333; }
+    .link-btn {
+      display: block;
+      text-decoration: none;
+      color: white;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 30px;
+      background: rgba(255,255,255,0.1);
+      transition: 0.3s;
+      backdrop-filter: blur(5px);
+    }
 
-    .social-btn:hover {
-      opacity: 0.8;
+    .link-btn:hover {
+      background: rgba(255,255,255,0.2);
       transform: scale(1.05);
+    }
+
+    .visitor-count {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #ccc;
     }
   </style>
 </head>
 <body>
 
-<h1>Welcome here 👋</h1>
-<p>Stay tuned for more updates</p>
+<div class="card">
+  <img src="https://i.imgur.com/yourimage.jpg" class="profile-pic">
 
-<div class="social-container">
-  <a href="https://twitter.com/YOUR_USERNAME" target="_blank" class="social-btn twitter">Twitter</a>
-  <a href="https://linkedin.com/in/YOUR_USERNAME" target="_blank" class="social-btn linkedin">LinkedIn</a>
-  <a href="https://instagram.com/YOUR_USERNAME" target="_blank" class="social-btn instagram">Instagram</a>
-  <a href="https://github.com/YOUR_USERNAME" target="_blank" class="social-btn github">GitHub</a>
+  <h1>Raj Wardhan</h1>
+  <div class="typing" id="typing"></div>
+
+  <a href="https://twitter.com/YOUR_USERNAME" target="_blank" class="link-btn">Twitter</a>
+  <a href="https://linkedin.com/in/YOUR_USERNAME" target="_blank" class="link-btn">LinkedIn</a>
+  <a href="https://instagram.com/YOUR_USERNAME" target="_blank" class="link-btn">Instagram</a>
+  <a href="https://github.com/YOUR_USERNAME" target="_blank" class="link-btn">GitHub</a>
+
+  <div class="visitor-count">
+    Visitors: <span id="visitorNumber">Loading...</span>
+  </div>
 </div>
 
 <script>
+  // Typing animation
+  const texts = ["Full Stack Developer", "Problem Solver", "Tech Enthusiast"];
+  let count = 0;
+  let index = 0;
+  let currentText = "";
+  let letter = "";
+
+  (function type() {
+    if (count === texts.length) count = 0;
+    currentText = texts[count];
+    letter = currentText.slice(0, ++index);
+    document.getElementById("typing").textContent = letter;
+    if (letter.length === currentText.length) {
+      setTimeout(() => {
+        index = 0;
+        count++;
+      }, 1000);
+    }
+    setTimeout(type, 100);
+  })();
+
+  // Call backend for tracking
   fetch("https://bio-tracker-1-ui5d.onrender.com/")
     .catch(() => {});
+
+  // Visitor counter fetch
+  fetch("https://bio-tracker-1-ui5d.onrender.com/count")
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("visitorNumber").textContent = data.count;
+    })
+    .catch(() => {
+      document.getElementById("visitorNumber").textContent = "—";
+    });
 </script>
 
 </body>
