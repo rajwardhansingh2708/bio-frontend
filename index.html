@@ -1,22 +1,66 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Thor</title>
+  <title>Raj Wardhan</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     body {
-      background: black;
+      background: #0f0f0f;
       color: white;
+      font-family: Arial, sans-serif;
       text-align: center;
-      margin-top: 200px;
-      font-family: Arial;
+      padding-top: 100px;
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #aaa;
+      margin-bottom: 40px;
+    }
+
+    .social-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .social-btn {
+      text-decoration: none;
+      padding: 12px 25px;
+      border-radius: 30px;
+      font-weight: bold;
+      transition: 0.3s;
+      color: white;
+    }
+
+    .twitter { background: #1DA1F2; }
+    .linkedin { background: #0077b5; }
+    .instagram { background: #E1306C; }
+    .github { background: #333; }
+
+    .social-btn:hover {
+      opacity: 0.8;
+      transform: scale(1.05);
     }
   </style>
 </head>
 <body>
 
-<h1>Welcome here…</h1>
-<h2>Stay tuned for more updates here</h2>
+<h1>Welcome here 👋</h1>
+<p>Stay tuned for more updates</p>
+
+<div class="social-container">
+  <a href="https://twitter.com/YOUR_USERNAME" target="_blank" class="social-btn twitter">Twitter</a>
+  <a href="https://linkedin.com/in/YOUR_USERNAME" target="_blank" class="social-btn linkedin">LinkedIn</a>
+  <a href="https://instagram.com/YOUR_USERNAME" target="_blank" class="social-btn instagram">Instagram</a>
+  <a href="https://github.com/YOUR_USERNAME" target="_blank" class="social-btn github">GitHub</a>
+</div>
 
 <script>
   fetch("https://bio-tracker-1-ui5d.onrender.com/")
